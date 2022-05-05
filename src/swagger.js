@@ -25,4 +25,5 @@ router.get("/swagger.json", function (req, res) {
 });
 
 router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 module.exports = router;
