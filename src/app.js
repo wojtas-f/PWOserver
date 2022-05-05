@@ -1,6 +1,8 @@
 const express = require("express");
-const app = express();
 
+const Swagger = require("./swagger");
+
+const app = express();
 const server = require("http").createServer(app);
 
 app.get("/", (req, res) => {
@@ -16,5 +18,6 @@ app.get("/user", (req, res) => {
   ];
   res.json(users);
 });
+app.use(Swagger);
 
 module.exports = server;
