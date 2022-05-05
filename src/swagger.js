@@ -5,9 +5,9 @@ const router = new express.Router();
 
 const swaggerDefinition = {
   info: {
-    title: "System rezerwacji tematów pracy dyplomowej",
+    title: "Thesis topic reservation system",
     version: "1.0.0",
-    description: "Systemy Teleinformatyczne - projekt",
+    description: "Pracownia wytwarzania oprogramowania 1 - projekt",
   },
   host: "localhost:3000",
   basePath: "/",
