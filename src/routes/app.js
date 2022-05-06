@@ -16,7 +16,10 @@ const router = new express.Router();
  *                  description: Unable to get api response
  */
 router.get("/", (req, res) => {
-  res.json({ msg: "hello world" });
+  res.json({
+    app: "REST API",
+    routes: [{ path: "/api-docs" }, { path: "/swagger.json" }],
+  });
 });
 
 module.exports = router;
