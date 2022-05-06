@@ -1,7 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 
-const Swagger = require("./routes/swagger");
+const Swagger = require("./swagger");
 const appRouter = require("./routes/app");
 const userRouter = require("./routes/user");
 
@@ -9,7 +9,11 @@ const app = express();
 const server = require("http").createServer(app);
 
 app.use(express.json());
-app.use(express.urlencoded());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 app.use(cookieParser());
 
 app.use(Swagger);

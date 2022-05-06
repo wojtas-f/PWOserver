@@ -5,11 +5,10 @@ const router = new express.Router();
 
 const swaggerDefinition = {
   info: {
-    title: "Thesis topic reservation system",
+    title: "System rezerwacji tematów pracy dyplomowej",
     version: "1.0.0",
-    description: "Pracownia wytwarzania oprogramowania 1 - projekt",
+    description: "Systemy Teleinformatyczne - projekt",
   },
-  host: "localhost:3000",
   basePath: "/",
 };
 
@@ -25,5 +24,4 @@ router.get("/swagger.json", function (req, res) {
 });
 
 router.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 module.exports = router;
