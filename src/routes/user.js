@@ -1,7 +1,7 @@
 const express = require("express");
 const router = new express.Router();
-const users = require("../data/users.json");
 const crypto = require("crypto");
+const db = require("../db.config");
 
 const getHashedPassword = (password) => {
   const sha256 = crypto.createHash("sha256");
@@ -12,7 +12,7 @@ const getHashedPassword = (password) => {
 /**
  * @swagger
  *
- * /user/all:
+ * /users:
  *      get:
  *          tags:
  *              - user
@@ -23,8 +23,9 @@ const getHashedPassword = (password) => {
  *              400:
  *                  description: Unable to get user list
  */
-router.get("/user/all", (req, res) => {
-  res.json(users);
+router.get("/users", async (req, res) => {
+  const { rows } = await db.query(`SELECT * FROM Users;`);
+  res.json(rows);
 });
 
 /**
@@ -45,10 +46,16 @@ router.get("/user/all", (req, res) => {
  *                properties:
  *                  firstName:
  *                    type: string
+ *                    required: true
  *                  lastName:
  *                    type: string
+ *                    required: true
  *                  email:
  *                    type: string
+ *                    required: true
+ *                  password:
+ *                    type: string
+ *                    required: true
  *          tags:
  *              - user
  *          description: Get list of users
@@ -59,23 +66,11 @@ router.get("/user/all", (req, res) => {
  *                  description: Unable to get user list
  */
 router.post("/user/add", (req, res) => {
-  const { email, firstName, lastName, password } = req.body;
-  console.log(users.users);
-  if (users.find((user) => user.email === email)) {
-    return res.json({
-      msg: "User already registered.",
-    });
-  }
+  const body = req.body;
+  body.password = getHashedPassword(body.password);
+  console.log(body);
 
-  // Store user into the database if you are using one
-  users.push({
-    firstName,
-    lastName,
-    email,
-    password: getHashedPassword(password),
-  });
-
-  return res.json(users);
+  return res.json(body);
 });
 
 module.exports = router;

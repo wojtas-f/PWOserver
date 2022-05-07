@@ -8,6 +8,9 @@ const userRouter = require("./routes/user");
 const app = express();
 const server = require("http").createServer(app);
 
+/**
+ * App
+ */
 app.use(express.json());
 app.use(
   express.urlencoded({
