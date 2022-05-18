@@ -3,3 +3,4 @@ npm-debug.log
 .DS_Store
 /*.env
 nodemon.json
+swagger.example.json
