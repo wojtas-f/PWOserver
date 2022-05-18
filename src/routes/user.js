@@ -40,12 +40,12 @@ const getHashedPassword = (password) => {
  *                  password:
  *                    type: string
  *                    required: true
- *          description: Get list of users
+ *          description: Create new user
  *          responses:
  *              200:
- *                  description: List of users
+ *                  description: New user created
  *              400:
- *                  description: Unable to get user list
+ *                  description: Unable to create user
  */
 router.post(
   "/user/add",
