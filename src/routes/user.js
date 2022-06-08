@@ -1,7 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const crypto = require("crypto");
-const db = require("../db.config");
+const db = require("../config/db.config");
 const { body, check, validationResult } = require("express-validator");
 
 const getHashedPassword = (password) => {

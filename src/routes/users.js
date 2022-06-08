@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const db = require("../db.config");
+const db = require("../config/db.config");
 
 /**
  * @swagger

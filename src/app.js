@@ -1,7 +1,8 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
+const cors = require("cors");
 
-const Swagger = require("./swagger");
+const Swagger = require("./config/swagger");
 const appRouter = require("./routes/app");
 const userRouter = require("./routes/user");
 const usersRouter = require("./routes/users");
@@ -9,7 +10,7 @@ const topicRouter = require("./routes/topic");
 
 const app = express();
 const server = require("http").createServer(app);
-
+app.use(cors());
 /**
  * App
  */
