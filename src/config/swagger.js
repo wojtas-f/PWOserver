@@ -1,3 +1,4 @@
+const path = require("path");
 const swaggerJSDoc = require("swagger-jsdoc");
 const swaggerUi = require("swagger-ui-express");
 const express = require("express");
@@ -5,16 +6,16 @@ const router = new express.Router();
 
 const swaggerDefinition = {
   info: {
-    title: "System rezerwacji tematów pracy dyplomowej",
+    title: "System rezerwacji projektów",
     version: "1.0.0",
-    description: "Systemy Teleinformatyczne - projekt",
+    description: "",
   },
   basePath: "/",
 };
-
+const routesPath = path.join(__dirname, "..", "routes", "*.js");
 const options = {
   swaggerDefinition,
-  apis: [__dirname + "/routes/*.js"],
+  apis: [routesPath],
 };
 
 const swaggerSpec = swaggerJSDoc(options);
