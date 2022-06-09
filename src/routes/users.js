@@ -18,38 +18,37 @@ const getHashedPassword = (password) => {
  * @swagger
  *
  * /users:
- *      get:
+ *      post:
  *          tags:
  *              - users
  *          description: Get list of users or a single user
  *          parameters:
- *              - in: path
+ *              - in: body
  *                name: id
  *                schema:
- *                  type: integer
- *                required: false
- *                description: Unique user identifier
- *              - in: path
- *                name: email
- *                schema:
- *                  type: string
- *                required: false
- *                description: User email address
+ *                  type: object
+ *                  properties:
+ *                    id:
+ *                      type: string
+ *                      required: false
+ *                    email:
+ *                      type: string
+ *                      required: false
  *          responses:
  *              200:
  *                  description: List of users
  *              400:
  *                  description: Unable to get user list
  */
-router.get("/users", validateGetUser(), validate, async (req, res) => {
-  const id = req.params.id;
-  const email = req.params.email;
+router.post("/users", validateGetUser(), validate, async (req, res) => {
+  const { id, email } = req.body;
   console.log("user id:", id);
   if (id) {
     const { rows } = await db.query(`SELECT * FROM Users WHERE id = $1;`, [id]);
     return res.json(rows);
   }
 
+  console.log("user email:", email);
   if (email) {
     const { rows } = await db.query(`SELECT * FROM Users WHERE email = $1;`, [
       email,
@@ -57,6 +56,7 @@ router.get("/users", validateGetUser(), validate, async (req, res) => {
     return res.json(rows);
   }
 
+  console.log("user:");
   const { rows } = await db.query(`SELECT * FROM Users;`);
   res.json(rows);
 });
