@@ -24,16 +24,14 @@ const getHashedPassword = (password) => {
  *          description: Get list of users or a single user
  *          parameters:
  *              - in: body
- *                name: id
+ *                name: user
  *                schema:
  *                  type: object
  *                  properties:
  *                    id:
- *                      type: string
- *                      required: false
+ *                      type: number
  *                    email:
  *                      type: string
- *                      required: false
  *          responses:
  *              200:
  *                  description: List of users
@@ -43,7 +41,7 @@ const getHashedPassword = (password) => {
 router.post("/users", validateGetUser(), validate, async (req, res) => {
   const { id, email } = req.body;
   console.log("user id:", id);
-  if (id) {
+  if (id || id === 0) {
     const { rows } = await db.query(`SELECT * FROM Users WHERE id = $1;`, [id]);
     return res.json(rows);
   }
@@ -71,7 +69,6 @@ router.post("/users", validateGetUser(), validate, async (req, res) => {
  *          parameters:
  *            - in: body
  *              name: user
- *              description: The user to create.
  *              schema:
  *                type: object
  *                required:
